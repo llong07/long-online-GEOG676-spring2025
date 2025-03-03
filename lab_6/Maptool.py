@@ -1,5 +1,6 @@
 
 import arcpy
+import time
 
 class Toolbox(object):
     def __init__(self):
@@ -46,7 +47,7 @@ class GraduatedColorsRenderer(object):
         # output project name 
         param3 = arcpy.Parameter(
             displayName = "Output Project Name",
-            name = "OutputLocation",
+            name = "OutputProjectName",
             datatype = "GPString",
             parameterType = "Required",
             direction = "Input"
@@ -120,7 +121,7 @@ class GraduatedColorsRenderer(object):
                         symbology.renderer.classificationField = "Shape_Area"
 
                         # increment progressor
-                        arcpy.SetProgressorPosition(start, step*2) # now is 66% complete
+                        arcpy.SetProgressorPosition(start + step*2) # now is 66% complete
                         arcpy.SetProgressorLabel("Cleaning up...")
                         time.sleep(readTime)
                         arcpy.AddMessage("Cleaning up...")
@@ -139,7 +140,7 @@ class GraduatedColorsRenderer(object):
                         print("NO feature layers found")
 
         # increment progressor
-        arcpy.SetProgressorPosition( start + step*3) # now is 99% completed
+        arcpy.SetProgressorPosition(start + step*3) # now is 99% completed
         arcpy.SetProgressorLabel("Saving...")
         time.sleep(readTime)
         arcpy.AddMessage("Saving...")
